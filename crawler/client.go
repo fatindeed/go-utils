@@ -1,5 +1,5 @@
-// Package goquery provides a goquery client.
-package goquery
+// Package crawler provides crawler utils.
+package crawler
 
 import (
 	"bytes"
@@ -10,8 +10,8 @@ import (
 	"github.com/go-resty/resty/v2"
 )
 
-// NewClient returns a new GoqueryClient.
-func NewClient(c *resty.Client) *GoqueryClient {
+// NewGoqueryClient returns a new GoqueryClient.
+func NewGoqueryClient(c *resty.Client) *GoqueryClient {
 	return &GoqueryClient{Client: c}
 }
 
@@ -25,7 +25,7 @@ func (c *GoqueryClient) GetDoc(uri string) (*goquery.Document, error) {
 	return c.GetDocWithQuery(uri, nil)
 }
 
-// GetDoc get goquery document with url.
+// GetDoc get goquery document with url and query string.
 func (c *GoqueryClient) GetDocWithQuery(uri string, query url.Values) (*goquery.Document, error) {
 	resp, err := c.Client.R().SetQueryParamsFromValues(query).Get(uri)
 	if err != nil {
