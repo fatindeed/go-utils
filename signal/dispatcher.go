@@ -1,3 +1,4 @@
+// Package signal provides graceful shutdown for your apps.
 package signal
 
 import (
@@ -52,22 +53,26 @@ func initDispatcher(sig ...os.Signal) {
 	go dispatcher.Listen()
 }
 
-func Listen(sig ...os.Signal) error {
-	if dispatcher != nil {
-		return fmt.Errorf("signal dispatcher already inited")
+// Listen can customize signals to be notified.
+func Listen(sig ...os.Signal) {
+	if dispatcher == nil {
+		initDispatcher(sig...)
+		return
 	}
-	initDispatcher(sig...)
-	return nil
+	signal.Stop(dispatcher.sigs)
+	signal.Notify(dispatcher.sigs, sig...)
 }
 
+// Dispatch will check if new signal received, and return a SignalError if yes.
 func Dispatch() error {
 	initDispatcher()
 	if dispatcher.lastSig == nil {
 		return nil
 	}
-	return signalError{Signal: dispatcher.lastSig}
+	return SignalError{Signal: dispatcher.lastSig}
 }
 
+// Stop singal dispatcher if exists.
 func Stop() {
 	if dispatcher != nil {
 		dispatcher.stop <- true

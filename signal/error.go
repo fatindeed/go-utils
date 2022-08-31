@@ -5,10 +5,12 @@ import (
 	"os"
 )
 
-type signalError struct {
+// SignalError is an error with os.Signal included.
+type SignalError struct {
 	os.Signal
 }
 
-func (err signalError) Error() string {
+// Error returns the error message.
+func (err SignalError) Error() string {
 	return fmt.Sprintf("signal: %s", err.Signal.String())
 }

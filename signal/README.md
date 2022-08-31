@@ -51,7 +51,9 @@ $ go run main.go
 signal: interrupt at 2022-08-31 12:54:42.567635 +0800 CST m=+6.013267001%
 ```
 
-This library only catch `SIGINT` and `SIGTERM` by default. If you want to customize signal, add `signal.Listen(...os.Signal)` in your code
+This library only catch `SIGINT` and `SIGTERM` by default.
+
+If you want to customize signals, add `signal.Listen(...os.Signal)` in your code.
 
 ```go
 signal.Listen(syscall.SIGINT, syscall.SIGTERM, syscall.SIGUSR1, syscall.SIGUSR2)
