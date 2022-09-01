@@ -1,4 +1,3 @@
-// Package signal provides graceful shutdown for your apps.
 package signal
 
 import (

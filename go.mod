@@ -11,3 +11,6 @@ require (
 	github.com/andybalholm/cascadia v1.3.1 // indirect
 	golang.org/x/net v0.0.0-20220826154423-83b083e8dc8b // indirect
 )
+
+// Remove dev releases
+retract [v0.0.1, v0.0.4]

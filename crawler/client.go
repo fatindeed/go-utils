@@ -1,4 +1,3 @@
-// Package crawler provides crawler utils.
 package crawler
 
 import (
